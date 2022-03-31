@@ -1,0 +1,18 @@
+h1 {
+  text-align: center;
+}
+
+.homePage {
+  background-color: rgb(230, 230, 230);
+  position: relative;
+  height: 100vh;
+}
+
+.homePageText {
+  font-size: 20pt;
+}
+
+.buttonToLoginPageContainer {
+  display: flex;
+  justify-content: center;
+}

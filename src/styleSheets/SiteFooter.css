@@ -1,0 +1,14 @@
+.footerContainer {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+
+  background-color: rgb(185, 185, 185);
+  display: table;
+}
+
+.footerText {
+  display: table-cell;
+  vertical-align: middle;
+}
