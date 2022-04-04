@@ -1,0 +1,85 @@
+.appform {
+    align-content: center;
+    background-color: beige;
+}
+
+h2 {
+    padding: 13px;
+    margin: auto;
+    text-align: center;
+    text-shadow: 0px 0px 1px grey;
+    /*background-color: rgba(255, 225, 0, 0.863);*/
+    background-color: rgb(255, 221, 31);
+    color: rgb(49, 134, 219);
+    position: relative;
+}
+
+Form {
+    padding: 13px;
+    margin: auto;
+    text-align: right;
+    position: relative;
+}
+
+.buttonSubmitInfo {
+    display: flex;
+    justify-content: center;
+}
+
+.btnSubmitInfo {
+    background-color: none;
+    color: cornflowerblue;
+    transition: all 0.7s ease;
+}
+
+.btnSubmitInfo:hover {
+    color: #132c33;
+    border: 3px solid #184562;
+    transition: all 0.7s ease;
+    letter-spacing: 3px;
+    box-shadow: inset 500px 0 0 0px #bdd2b6;
+}
+
+.lvlRadio {
+    align-items: center;
+}
+
+.gradSem {
+    align-items: center;
+}
+
+.cGpa {
+    align-items: center;
+}
+
+.hrs {
+    align-items: center;
+}
+
+.ugDeg{
+    align-items: center;
+}
+
+.currMajor{
+    align-items: center;
+}
+
+.appFor{
+    align-items: center;
+}
+
+.gtaCert{
+    align-items: center;
+}
+
+.yesCert{
+    align-items: center;
+}
+
+.waiveCert{
+    align-items: center;
+}
+
+.umkcCourse{
+    align-items: center;
+}
