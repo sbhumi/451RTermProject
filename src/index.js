@@ -2,12 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styleSheets/index.css';
 import Home from './components/Home';
+import App from './components/App';
+import TempLoginRedirect from './components/TempLoginRedirect';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
+import { msalConfig } from "./authConfig";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+
+
+const msalInstance = new PublicClientApplication(msalConfig);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <MsalProvider instance={msalInstance}>
+      
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/temp-Login-Redirect" element={<TempLoginRedirect />} />
+        </Routes>
+      </Router>
+
+    </MsalProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
