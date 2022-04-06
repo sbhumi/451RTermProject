@@ -4,7 +4,9 @@ import './styleSheets/index.css';
 import Home from './components/Home';
 import App from './components/App';
 import ApplicantHome from './components/ApplicantHome';
+import AppForm from './components/AppForm';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { PublicClientApplication } from "@azure/msal-browser";
 import { MsalProvider } from "@azure/msal-react";
@@ -17,6 +19,7 @@ const msalInstance = new PublicClientApplication(msalConfig);
 
 ReactDOM.render(
   <React.StrictMode>
+
     <MsalProvider instance={msalInstance}>
       
       <Router>
@@ -27,6 +30,9 @@ ReactDOM.render(
       </Router>
 
     </MsalProvider>
+
+    <AppForm />
+
   </React.StrictMode>,
   document.getElementById('root')
 );
