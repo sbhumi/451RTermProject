@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './styleSheets/index.css';
 import Home from './components/Home';
 import App from './components/App';
-import TempLoginRedirect from './components/TempLoginRedirect';
+import ApplicantHome from './components/ApplicantHome';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 import { PublicClientApplication } from "@azure/msal-browser";
@@ -22,7 +22,7 @@ ReactDOM.render(
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/temp-Login-Redirect" element={<TempLoginRedirect />} />
+          <Route path="/applicant-home" element={<ApplicantHome />} />
         </Routes>
       </Router>
 

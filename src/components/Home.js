@@ -9,7 +9,6 @@ import { callMsGraph } from "../graph";
 import { NavigationClient } from "@azure/msal-browser";
 import { useNavigate } from "react-router-dom";
 import {Navigate} from 'react-router-dom';
-import TempLoginRedirect from "./TempLoginRedirect";
 
 
 function HomePage(Home) {
@@ -28,36 +27,29 @@ class Home extends React.Component {
     }
 
     handleLogin(instance) {
+        let path = "/applicant-home";
         instance.instance.loginRedirect(loginRequest).catch(e => {
             console.error(e);
-        });  
-        
-        let path = "/temp-Login-Redirect";
-        this.props.navigate(path);
-        
+        }).then(this.props.navigate(path));
     }
 
-    render() {
-        
+    render() {   
         const msalObject = this.props.msalObject;
-        //console.log(typeof(msalValue));
-        //console.log(msalValue);
-
         return (
             <div className="homePage">
                 <SiteHeader />
 
-                <br />
+                <br/>
                 <h1 className="homePageText">Welcome to UMKC's Graduate Teaching Application Portal!</h1>
-                <br />
+                <br/>
                 <h1 className="homePageText">To get started, login using the button below.</h1>
-                <br /><br /><br /><br /><br />
+                <br/><br/><br/><br/><br/>
 
-                <br />
+                <br/>
                 <div className="buttonToLoginPageContainer">
                     <button className="btn btn-primary" onClick={() => this.handleLogin(msalObject)}>Click Here to Login</button>
                 </div>
-                <br />
+                <br/>
                 
                 <SiteFooter />
             </div>
