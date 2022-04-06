@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styleSheets/index.css';
 import Home from './components/Home';
+import AppForm from './components/AppForm';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <AppForm />
   </React.StrictMode>,
   document.getElementById('root')
 );
