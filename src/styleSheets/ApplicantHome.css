@@ -1,0 +1,22 @@
+.HomeNavigation {
+    
+    vertical-align: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.home-page-btns {
+    width: 50%;
+    text-align: center;
+    padding: 15px;
+    background-color: rgb(185, 185, 185);
+
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.app-home-desc {
+    text-align: center;
+}
