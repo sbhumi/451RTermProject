@@ -26,12 +26,11 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/applicant-home" element={<ApplicantHome />} />
+          <Route path="/application-form" element={<AppForm />} />
         </Routes>
       </Router>
 
     </MsalProvider>
-
-    <AppForm />
 
   </React.StrictMode>,
   document.getElementById('root')

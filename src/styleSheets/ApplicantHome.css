@@ -1,8 +1,14 @@
+.home-page {
+    background-color: beige;
+    height: 100vh;
+}
+
 .HomeNavigation {
     
     vertical-align: auto;
     display: flex;
     justify-content: center;
+    background-color: beige;
 }
 
 .home-page-btns {
