@@ -7,6 +7,8 @@ import { Form, Row, Col } from 'react-bootstrap';
 import { scaleDown as Menu} from 'react-burger-menu';
 import '../styleSheets/AppForm.css';
 import '../styleSheets/NavMenu.css';
+import { useNavigate } from "react-router-dom";
+import { useIsAuthenticated,  AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 
 class AppForm extends React.Component {
 	showSettings (event) {
@@ -16,12 +18,12 @@ class AppForm extends React.Component {
 	render() { 
 		return (
 			<div className = "appform" >
-
 				<AppNavMenu/>
 
 				<main>
 					<SiteHeader />
-
+					<AuthenticatedTemplate>
+					
 					<h2 className = "uniInfo">University Information</h2>
 					<br></br>
 
@@ -294,6 +296,7 @@ class AppForm extends React.Component {
 					</div>
 					<br></br><br></br><br></br>
 
+				</AuthenticatedTemplate>
 				<SiteFooter />
 			</main>
 		</div>
