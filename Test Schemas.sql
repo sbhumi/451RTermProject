@@ -28,3 +28,8 @@ Authorization dbo
 GO
 EXECUTE sp_addextendedproperty @name='tSQLt.TestClass',@value=1,@level0type='SCHEMA',@level0name='testApplicationsAdd'; 
 Go
+CREATE SCHEMA [testTermAdd]
+Authorization dbo
+GO
+EXECUTE sp_addextendedproperty @name='tSQLt.TestClass',@value=1,@level0type='SCHEMA',@level0name='testTestAdd'; 
+Go
