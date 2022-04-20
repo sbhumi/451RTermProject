@@ -9,9 +9,9 @@ function AdminNavMenu() {
     return (
         <div>
             <Menu>
-                <a id = "admin" className="menu-item" href = "/admin">Home</a><br></br>
-                <a id = "viewapps" className="menu-item" href = "/viewapps">View Applicants</a><br></br>
-                <a id = "editjobs" className="menu-item" href = "/editjobs">Edit Job Listings</a><br></br>
+                <a id = "admin" className="menu-item" href = "/admin-home">Home</a><br></br>
+                <a id = "viewapps" className="menu-item" href = "/view-apps">View Applicants</a><br></br>
+                <a id = "editjobs" className="menu-item" href = "/edit-jobs">Edit Job Listings</a><br></br>
                 <a id = "contact" className = "contact" href = "/contact">Contact Support</a>
             </Menu>
         </div>        

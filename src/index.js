@@ -5,6 +5,10 @@ import Home from './components/Home';
 import App from './components/App';
 import ApplicantHome from './components/ApplicantHome';
 import AppForm from './components/AppForm';
+import ProfileForm from "./components/ProfileForm";
+import Contact from "./components/Contact";
+import AdminHome from "./components/AdminHome";
+import AddJob from './components/AddJob';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -27,6 +31,10 @@ ReactDOM.render(
           <Route path="/" element={<Home />} />
           <Route path="/applicant-home" element={<ApplicantHome />} />
           <Route path="/application-form" element={<AppForm />} />
+          <Route path="/profile" element={<ProfileForm />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/admin-home" element={<AdminHome />} />
+          <Route path="/edit-jobs" element={<AddJob />} />
         </Routes>
       </Router>
 

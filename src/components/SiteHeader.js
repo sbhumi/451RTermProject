@@ -1,3 +1,4 @@
+import React from "react";
 import '../styleSheets/SiteHeader.css';
 import logo from '../kangaroo-logo.png'; 
 

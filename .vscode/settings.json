@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/b8a9bf5c-e38e-4cd3-9f3e-7372e83389d8/resourceGroups/gtaApp-rg/providers/Microsoft.Web/sites/UMKCGTA451",
+    "appService.deploySubpath": "."
+}
