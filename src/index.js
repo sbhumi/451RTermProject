@@ -12,6 +12,8 @@ import { PublicClientApplication } from "@azure/msal-browser";
 import { MsalProvider } from "@azure/msal-react";
 import { msalConfig } from "./authConfig";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from "./components/store";
 
 
 
@@ -22,6 +24,7 @@ ReactDOM.render(
 
     <MsalProvider instance={msalInstance}>
       
+      <Provider store={store}>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -29,6 +32,7 @@ ReactDOM.render(
           <Route path="/application-form" element={<AppForm />} />
         </Routes>
       </Router>
+      </Provider>
 
     </MsalProvider>
 

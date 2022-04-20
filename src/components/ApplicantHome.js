@@ -44,25 +44,3 @@ function ApplicantHome() {
 }
 
 export default ApplicantHome;
-
-
-/*
-
-<br/>
-                    <div className="home-page-btn">
-                        <button className="btn btn-primary">Edit Profile</button> <br/>
-                    </div>
-
-                    <div className="home-page-btn">
-                        <button className="btn btn-primary">New Application</button> <br/>
-                    </div>
-                    
-                    <div className="home-page-btn">
-                        <button className="btn btn-primary">Application Status</button> <br/>
-                    </div>
-                    
-                    <div className="home-page-btn">
-                        <button className="btn btn-primary">Job Listings</button>
-                    </div>
-
-*/
