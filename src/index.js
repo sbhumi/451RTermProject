@@ -9,6 +9,7 @@ import ProfileForm from "./components/ProfileForm";
 import Contact from "./components/Contact";
 import AdminHome from "./components/AdminHome";
 import AddJob from './components/AddJob';
+import JobPostings from "./components/JobPostings";
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -35,6 +36,7 @@ ReactDOM.render(
           <Route path="/applicant-home" element={<ApplicantHome />} />
           <Route path="/application-form" element={<AppForm />} />
           <Route path="/profile" element={<ProfileForm />} />
+          <Route path="/job-postings" element={<JobPostings/>} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin-home" element={<AdminHome />} />
           <Route path="/edit-jobs" element={<AddJob />} />
