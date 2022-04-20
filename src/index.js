@@ -10,6 +10,7 @@ import Contact from "./components/Contact";
 import AdminHome from "./components/AdminHome";
 import AddJob from './components/AddJob';
 import JobPostings from "./components/JobPostings";
+import ViewApps from "./components/ViewApps";
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -39,6 +40,7 @@ ReactDOM.render(
           <Route path="/job-postings" element={<JobPostings/>} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin-home" element={<AdminHome />} />
+          <Route path="/view-apps" element={<ViewApps/>}/>
           <Route path="/edit-jobs" element={<AddJob />} />
         </Routes>
       </Router>
