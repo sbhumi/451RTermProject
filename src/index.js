@@ -5,6 +5,7 @@ import Home from './components/Home';
 import App from './components/App';
 import ApplicantHome from './components/ApplicantHome';
 import AppForm from './components/AppForm';
+import AppStatus from './components/AppStatus';
 import ProfileForm from "./components/ProfileForm";
 import Contact from "./components/Contact";
 import AdminHome from "./components/AdminHome";
@@ -36,6 +37,7 @@ ReactDOM.render(
           <Route path="/" element={<Home />} />
           <Route path="/applicant-home" element={<ApplicantHome />} />
           <Route path="/application-form" element={<AppForm />} />
+          <Route path="/application-status" element={<AppStatus />} />
           <Route path="/profile" element={<ProfileForm />} />
           <Route path="/job-postings" element={<JobPostings/>} />
           <Route path="/contact" element={<Contact />} />

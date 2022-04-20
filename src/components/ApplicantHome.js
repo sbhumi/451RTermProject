@@ -11,7 +11,7 @@ function ApplicantHome() {
     
     const profilePath = "/profile";
     const applicationFormPath = "/application-form";
-    const applicationStatusPath = "";
+    const applicationStatusPath = "/application-status";
     const jobPostingsPath = "/job-postings";
     const supportPath = "/contact";
     
@@ -31,7 +31,7 @@ function ApplicantHome() {
                         <div className="d-grid gap-4">
                             <button className="btn btn-primary" onClick={() => navigate(profilePath)}>Edit Profile</button>
                             <button className="btn btn-primary" onClick={() => navigate(applicationFormPath)}>Edit Application</button>
-                            <button className="btn btn-primary">Application Status</button>
+                            <button className="btn btn-primary" onClick={() => navigate(applicationStatusPath)}>Application Status</button>
                             <button className="btn btn-primary" onClick={() => navigate(jobPostingsPath)}>Job Postings</button>
                             <button className="btn btn-primary" onClick={() => navigate(supportPath)}>Contact Support</button>
                             
