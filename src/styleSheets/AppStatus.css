@@ -1,0 +1,87 @@
+.appStatus {
+    align-content: center;
+    background-color: beige;
+    min-height: 100vh;
+}
+
+.appStatusList {
+    align-content: center;
+    border: 5px solid black !important;
+    padding: 13px;
+    position: relative;
+    max-width: 80vw;
+    background-color: rgb(224, 210, 189);
+}
+
+.tableHeader {
+    border: 4px solid black !important;
+    background-color: rgb(245, 206, 148);
+}
+
+th {
+    border: 3px solid black !important;
+    font-size: 15pt;
+}
+
+td {
+    border-right: 3px solid black !important;
+    border-bottom: 2px solid black !important;
+    font-size: 11pt;
+}
+
+h2 {
+    padding: 13px;
+    margin: auto;
+    text-align: center;
+    text-shadow: 0px 0px 1px grey;
+    /*background-color: rgba(255, 225, 0, 0.863);*/
+    background-color: rgb(255, 221, 31);
+    color: rgb(49, 134, 219);
+    position: relative;
+}
+
+Form {
+    padding: 13px;
+    margin: auto;
+    text-align: right;
+    position: relative;
+}
+
+.buttonSubmitInfo {
+    display: flex;
+    justify-content: center;
+}
+
+.btnSubmitInfo {
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
+    color: gold;
+    transition: all 0.7s ease;
+    font-family: helvetica;
+    box-shadow: 0px 0px 4px grey;
+}
+
+.btnSubmitInfo:hover {
+    font-family: helvetica;
+    color: #132c33;
+    border: 2px solid #184562;
+    transition: all 0.7s ease;
+    letter-spacing: 2px;
+    box-shadow: inset 500px 0 0 0px #bdd2b6;
+}
+
+.fullName {
+    align-items: center;
+}
+
+.umEmail {
+    align-items: center;
+}
+
+.phoneNum {
+    align-items: center;
+}
+
+.stuId{
+    align-items: center;
+}

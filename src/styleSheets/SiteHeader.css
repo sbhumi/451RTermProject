@@ -44,5 +44,7 @@ img {
   height: 157px;
 
   padding-bottom: 0px;
-  margin-bottom: 0px;
+  margin-bottom: 3px;
+  margin-top: 3px;
+  margin-left: 3px;
 }
