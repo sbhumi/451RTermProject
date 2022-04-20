@@ -6,13 +6,11 @@ import { useMsal, useIsAuthenticated,  AuthenticatedTemplate, UnauthenticatedTem
 import { useNavigate } from "react-router-dom";
 
 
-function ApplicantHome() {
+function AdminHome() {
     const navigate = useNavigate();
     
-    const profilePath = "/profile";
-    const applicationFormPath = "/application-form";
-    const applicationStatusPath = "";
-    const jobPostingsPath = "";
+    const applicationsPath = "/view-apps";
+    const jobsPath = "/edit-jobs";
     const supportPath = "/contact";
     
     
@@ -22,17 +20,15 @@ function ApplicantHome() {
 
             <AuthenticatedTemplate>
                 <br/>
-                <h1>Welcome back to the Application Portal!</h1>
+                <h1>Welcome back to the Admin Portal!</h1>
                 <br/>
                 <p className="app-home-desc">Please select an option below.</p>
 
                 <div className="HomeNavigation">
                     <div className="home-page-btns">
                         <div className="d-grid gap-4">
-                            <button className="btn btn-primary" onClick={() => navigate(profilePath)}>Edit Profile</button>
-                            <button className="btn btn-primary" onClick={() => navigate(applicationFormPath)}>Edit Application</button>
-                            <button className="btn btn-primary">Application Status</button>
-                            <button className="btn btn-primary">Job Postings</button>
+                            <button className="btn btn-primary" onClick={() => navigate(applicationsPath)}>View Applications</button>
+                            <button className="btn btn-primary" onClick={() => navigate(jobsPath)}>Edit Job Listings</button>
                             <button className="btn btn-primary" onClick={() => navigate(supportPath)}>Contact Support</button>
                             
                         </div>
@@ -45,4 +41,4 @@ function ApplicantHome() {
     );
 }
 
-export default ApplicantHome;
+export default AdminHome;

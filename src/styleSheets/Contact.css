@@ -1,0 +1,24 @@
+.contact-page {
+    background-color: beige;
+    height: 100vh;
+}
+
+.contactInfo {
+    
+    vertical-align: auto;
+    display: flex;
+    justify-content: center;
+    background-color: beige;
+}
+
+.boxes {
+    width: 50%;
+    text-align: center;
+    padding: 15px;
+    background-color: darkslategrey;
+    color: goldenrod;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
