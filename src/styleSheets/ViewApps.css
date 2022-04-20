@@ -1,0 +1,24 @@
+.tableDiv {
+    max-width: 80vw;
+    background-color: white;
+}
+
+.ViewApplicationsPage {
+    background-color: beige;
+    min-height: 100vh;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    width: 40vw;
+}
+
+.page-heading {
+    padding: 15px;
+}
+
+.search-button {
+    margin-left: 20px;
+}

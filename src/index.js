@@ -10,6 +10,8 @@ import ProfileForm from "./components/ProfileForm";
 import Contact from "./components/Contact";
 import AdminHome from "./components/AdminHome";
 import AddJob from './components/AddJob';
+import JobPostings from "./components/JobPostings";
+import ViewApps from "./components/ViewApps";
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -17,6 +19,8 @@ import { PublicClientApplication } from "@azure/msal-browser";
 import { MsalProvider } from "@azure/msal-react";
 import { msalConfig } from "./authConfig";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from "./components/store";
 
 
 
@@ -27,6 +31,7 @@ ReactDOM.render(
 
     <MsalProvider instance={msalInstance}>
       
+      <Provider store={store}>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -34,11 +39,14 @@ ReactDOM.render(
           <Route path="/application-form" element={<AppForm />} />
           <Route path="/application-status" element={<AppStatus />} />
           <Route path="/profile" element={<ProfileForm />} />
+          <Route path="/job-postings" element={<JobPostings/>} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin-home" element={<AdminHome />} />
+          <Route path="/view-apps" element={<ViewApps/>}/>
           <Route path="/edit-jobs" element={<AddJob />} />
         </Routes>
       </Router>
+      </Provider>
 
     </MsalProvider>
 

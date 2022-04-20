@@ -12,7 +12,7 @@ function ApplicantHome() {
     const profilePath = "/profile";
     const applicationFormPath = "/application-form";
     const applicationStatusPath = "/application-status";
-    const jobPostingsPath = "";
+    const jobPostingsPath = "/job-postings";
     const supportPath = "/contact";
     
     
@@ -32,7 +32,7 @@ function ApplicantHome() {
                             <button className="btn btn-primary" onClick={() => navigate(profilePath)}>Edit Profile</button>
                             <button className="btn btn-primary" onClick={() => navigate(applicationFormPath)}>Edit Application</button>
                             <button className="btn btn-primary" onClick={() => navigate(applicationStatusPath)}>Application Status</button>
-                            <button className="btn btn-primary">Job Postings</button>
+                            <button className="btn btn-primary" onClick={() => navigate(jobPostingsPath)}>Job Postings</button>
                             <button className="btn btn-primary" onClick={() => navigate(supportPath)}>Contact Support</button>
                             
                         </div>
@@ -46,25 +46,3 @@ function ApplicantHome() {
 }
 
 export default ApplicantHome;
-
-
-/*
-
-<br/>
-                    <div className="home-page-btn">
-                        <button className="btn btn-primary">Edit Profile</button> <br/>
-                    </div>
-
-                    <div className="home-page-btn">
-                        <button className="btn btn-primary">New Application</button> <br/>
-                    </div>
-                    
-                    <div className="home-page-btn">
-                        <button className="btn btn-primary">Application Status</button> <br/>
-                    </div>
-                    
-                    <div className="home-page-btn">
-                        <button className="btn btn-primary">Job Listings</button>
-                    </div>
-
-*/

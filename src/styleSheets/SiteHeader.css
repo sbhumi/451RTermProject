@@ -3,7 +3,8 @@
   overflow: hidden;
   color: gold;
   display: flex;
-  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .headerText {
@@ -37,6 +38,16 @@
   text-shadow: 2px 2px 4px #000000;
 
   font-size: 36pt;
+}
+
+.signOutBtnDiv {
+  padding: 20px;
+
+}
+
+.signOutHeader {
+  text-shadow: 2px 2px 4px #000000;   
+  padding-bottom: 15px;
 }
 
 img {
