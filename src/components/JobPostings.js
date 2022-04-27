@@ -17,10 +17,8 @@ function JobPostings() {
         <AppNavMenu/>
         <SiteHeader/>
 
-        
-        
         <center>
-        <h3 className='page-heading'>Job Postings</h3>
+        <h2 className='page-heading'>Job Postings</h2>
 
         <div className='search'>
             <input type="search" className="search-bar form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
@@ -30,11 +28,11 @@ function JobPostings() {
             <div className="tableDiv">
                 <Table striped bordered hover size="sm">
                 <thead align="center">
-                    <tr>
-                        <th>Job</th>
-                        <th>Type</th>
-                        <th>Description</th>
-                        <th>Apply</th>
+                    <tr className = "tableHeader">
+                        <th>JOB:</th>
+                        <th>TYPE:</th>
+                        <th>DESCRIPTION:</th>
+                        <th>APPLY:</th>
                     </tr>
                 </thead>
                 <tbody align="center">

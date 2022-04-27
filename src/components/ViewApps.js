@@ -12,7 +12,7 @@ function ViewApps() {
         <SiteHeader/>
         
         <center>
-        <h3 className='page-heading'>View Applications</h3>
+        <h2 className='page-heading'>View Applications</h2>
 
         <div className='search'>
             <input type="search" className="search-bar form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
@@ -22,10 +22,10 @@ function ViewApps() {
             <div className="tableDiv">
                 <Table striped bordered hover size="sm">
                 <thead align="center">
-                    <tr>
-                        <th>Application</th>
-                        <th># Applicants</th>
-                        <th>Actions</th>
+                    <tr className = "tableHeader">
+                        <th>APPLICATION:</th>
+                        <th># APPLICANTS:</th>
+                        <th>ACTIONS:</th>
                     </tr>
                 </thead>
                 <tbody align="center">
