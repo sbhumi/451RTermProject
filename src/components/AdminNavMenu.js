@@ -13,6 +13,7 @@ function AdminNavMenu() {
                 <a id = "viewapps" className="menu-item" href = "/view-apps">View Applicants</a><br></br>
                 <a id = "editjobs" className="menu-item" href = "/edit-jobs">Edit Job Listings</a><br></br>
                 <a id = "contact" className = "contact" href = "/contact">Contact Support</a>
+                <br></br><a id = "appTemp" className = "menu-item" href = "/applicant-home">Applicant Temp</a>
             </Menu>
         </div>        
     )
