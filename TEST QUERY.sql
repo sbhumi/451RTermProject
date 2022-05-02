@@ -47,4 +47,18 @@ AS
 		END DESC;
 GO
 
--- JANKY AF BUT IT SHOULD DO THE TRICK
+-- JANKY AF BUT IT SHOULD DO THE TRICK\
+
+-- This trigger should prevent anyone from applying for a job unless they have a gta cert
+
+CREATE TRIGGER gtaCertRequired
+	ON APPLICATIONS AFTER INSERT
+	AS
+		IF((SELECT TOP 1 STUDENT.GTA_CERT_LOCATION FROM STUDENT
+		INNER join inserted
+		ON inserted.STUDENTID = STUDENT.STUDENTID) IS NULL)
+		BEGIN
+			RAISERROR('Requirements not met',1,1);
+			ROLLBACK
+		END
+GO
