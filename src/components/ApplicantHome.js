@@ -4,6 +4,7 @@ import SiteHeader from "./SiteHeader";
 import "../styleSheets/ApplicantHome.css";
 import { useMsal, useIsAuthenticated,  AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
 import { useNavigate } from "react-router-dom";
+import ProfileContent from "./ProfileContent";
 
 
 function ApplicantHome() {
@@ -15,6 +16,7 @@ function ApplicantHome() {
     const jobPostingsPath = "/job-postings";
     const supportPath = "/contact";
     
+    ProfileContent();
     
     return (
         <div className="home-page">
