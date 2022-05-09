@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
+import ProfileContent from './ProfileContent';
 import { Form, Row, Col } from 'react-bootstrap';
 import {scaleDown as Menu} from 'react-burger-menu';
+import { useNavigate } from "react-router-dom";
 import '../styleSheets/NavMenu.css';
 
 function AppNavMenu() {
+    const navigate = useNavigate();
+
     return (
         <div>
             <Menu>

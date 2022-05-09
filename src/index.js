@@ -21,6 +21,7 @@ import { msalConfig } from "./authConfig";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from "./components/store";
+import Redirecting from './components/Redirecting';
 
 
 
@@ -35,6 +36,7 @@ ReactDOM.render(
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/redirecting" element={<Redirecting/>} />
           <Route path="/applicant-home" element={<ApplicantHome />} />
           <Route path="/application-form" element={<AppForm />} />
           <Route path="/application-status" element={<AppStatus />} />
