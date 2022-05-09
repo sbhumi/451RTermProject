@@ -3,17 +3,24 @@ import { useMsal } from "@azure/msal-react";
 import { useNavigate } from "react-router-dom";
 import "../styleSheets/SiteHeader.css";
 import { useIsAuthenticated,  AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import { useSelector, useDispatch } from 'react-redux';
+
+
 
 function handleLogout(instance, navigate) {
     instance.logoutRedirect().catch(e => {
         console.error(e);
-    }).then(navigate("/")).then(alert("You are successfully signed out."));
+    }).then(navigate("/"));
 }
 
 function SignOutButton() {
     const { instance, accounts } = useMsal();
     const name = accounts[0] && accounts[0].name;
     const navigate = useNavigate();
+
+    const microsoftData = useSelector((state) => state.microsoftData.value);
+
+    
 
     return (
         <div>

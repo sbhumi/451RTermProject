@@ -9,6 +9,8 @@ import { callMsGraph } from "../graph";
 import { NavigationClient } from "@azure/msal-browser";
 import { useNavigate } from "react-router-dom";
 import {Navigate} from 'react-router-dom';
+import ProfileContent from "./ProfileContent";
+
 
 
 function HomePage(Home) {
@@ -27,10 +29,12 @@ class Home extends React.Component {
     }
 
     handleLogin(instance) {
-        let path = "/applicant-home";
+        let path = "/redirecting";
         instance.instance.loginRedirect(loginRequest).catch(e => {
             console.error(e);
         }).then(this.props.navigate(path));
+        
+
     }
 
     render() {   

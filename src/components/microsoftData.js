@@ -4,11 +4,13 @@ import { createSlice } from '@reduxjs/toolkit'
 export const microsoftSlice = createSlice({
     name: 'microsoftData',
     initialState: {
-      value: null,
+      value: [],
     },
     reducers: {
       assignData: (state, action) => {
-        state.value = action.payload
+        console.log("inside reducer");
+        console.log(action.payload);
+        state.value = [action.payload];
       },
     },
   })
