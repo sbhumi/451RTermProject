@@ -10,25 +10,51 @@ import '../styleSheets/NavMenu.css';
 import { useNavigate } from "react-router-dom";
 import ReturnProfileData from './ReturnProfile';
 import { useIsAuthenticated,  AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import { useSelector, useDispatch } from 'react-redux';
+import microsoftData from './microsoftData';
+import ProfileContent from './ProfileContent';
 
-/*function ProfileFormPage(ProfileForm) {
+function ProfileFormPage(ProfileForm) {
     return function PageHOC() {
-        const profileData = ReturnProfileData();
-        return <ProfileForm graphData={profileData} />;
+		const microsoftData = useSelector((state) => state.microsoftData.value);
+		console.log(microsoftData);
+        return <ProfileForm microsoftData={microsoftData} />;
     }
-}*/
+}
 
 
 class ProfileForm extends React.Component {
-    /*constructor(props) {
+    constructor(props) {
         super(props);
-    }*/
+		this.state = {
+			phoneNumberInput: "",
+			studentIdInput: ""
+		}
+    }
+
+	updatePhoneNumberInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			phoneNumberInput: val
+		});
+	}
+
+	updateStudentIdInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			studentIdInput: val
+		});
+	}
 
 	showSettings (event) {
 		event.preventDefault();
 	}
 
 	render() {
+		var firstName = this.props.microsoftData[0].givenName;
+		var lastName = this.props.microsoftData[0].surname;
+		var email = this.props.microsoftData[0].userPrincipalName;
+		
 		return (
 			<div className = "profileform" >
 				<AppNavMenu/>
@@ -45,7 +71,7 @@ class ProfileForm extends React.Component {
 						<Col></Col><Col></Col>
 						<Form.Label column sm = {2}>Full Name:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "text" placeholder = "insert name here" disabled/>
+								<Form.Control size = "sm" type = "text" placeholder ={firstName + " " + lastName} disabled/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Enter your legal name.</Form.Text>
@@ -57,7 +83,7 @@ class ProfileForm extends React.Component {
 						<Col></Col><Col></Col>
 						<Form.Label column sm = {2}>UMKC Email:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "email" placeholder = "kaseykangaroo@umsystem.edu" disabled/>
+								<Form.Control size = "sm" type = "email" placeholder ={email} disabled/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Enter your umsystem email.</Form.Text>
@@ -68,10 +94,10 @@ class ProfileForm extends React.Component {
 						<Col></Col><Col></Col>
 						<Form.Label column sm = {2}>Phone Number:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "integer" placeholder = "1234567890"/>
+								<Form.Control size = "sm" type = "integer" placeholder = "1234567890" value={this.state.phoneNumberInput} onChange={evt => this.updatePhoneNumberInput(evt)}/>
 							</Col>
 							<Col sm = {3} align = "left">
-								<Form.Text muted>Enter your phone number.</Form.Text>
+								<Form.Text muted >Enter your phone number.</Form.Text>
 							</Col><Col></Col>
 						</Form.Group></Row>
 
@@ -79,7 +105,7 @@ class ProfileForm extends React.Component {
 						<Col></Col><Col></Col>
 						<Form.Label column sm = {2}>Student ID:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "integer" placeholder = "01234567"/>
+								<Form.Control size = "sm" type = "integer" placeholder = "01234567" value={this.state.studentIdInput} onChange={evt => this.updateStudentIdInput(evt)}/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Enter your student ID.</Form.Text>
@@ -93,7 +119,7 @@ class ProfileForm extends React.Component {
 
 					<br></br><br></br><br></br>
 					<div className="buttonSubmitInfo">
-						<button className="btnSubmitInfo">Submit Information</button>
+						<button className="btnSubmitInfo" onClick={() => {}}>Submit Information</button>
 					</div>
 					<br></br><br></br><br></br>
 
@@ -105,4 +131,4 @@ class ProfileForm extends React.Component {
 	}
 }
  
-export default ProfileForm;
+export default ProfileFormPage(ProfileForm);
