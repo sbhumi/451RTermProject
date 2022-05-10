@@ -95,7 +95,13 @@ CONSTRAINT GRADERANGEREQUIREMENTS CHECK(GRADE <= 4.0 AND GRADE >= 0.0)
 );
 GO
 
-
+/*
+filterJobRequirements:
+returns classes and grade in classes needed to apply to a job
+Dependencies: 
+Parameters:
+JOBID INT: ID of the job being applied for
+*/
 
 CREATE PROCEDURE filterJobRequirements
 	@JOBID INT
@@ -108,6 +114,14 @@ GO
 
 
 
+/*
+filterJob
+returns jobtitle and positions available for a given class
+Dependencies: 
+Parameters:
+CLASSID INT: ID of class being searched
+*/
+
 CREATE PROCEDURE filterJob
 	@CLASSID int
 AS
@@ -117,7 +131,14 @@ AS
 	WHERE CLASSID = @CLASSID;
 GO
 
+/*
 
+filterAppliationsbyJob
+returns all students who have applied to a job
+Dependencies
+Parameters:
+JOBID: (INT) ID of job being searched
+*/
 
 CREATE PROCEDURE filterApplicationsbyJob
 	@JOBID INT
@@ -128,7 +149,13 @@ AS
 	WHERE JOBID = @JOBID;
 GO
 
-
+/*
+filterApplicationsbyClass
+returns all applications associated with a class
+Dependencies: 
+Parameters:
+CLASSID (INT): ID of class being searched
+*/
 
 CREATE PROCEDURE filterApplicationsbyClass
 	@CLASSID INT
@@ -142,7 +169,13 @@ AS
 	WHERE CLASSID = @CLASSID);
 GO
 
-
+/*
+filterApplicantsByJob:
+returns student first and last name along with grade received in class 
+Dependencies
+Parameters:
+JOBID: (int) ID of job being searched
+*/
 
 CREATE PROCEDURE filterApplicantsByJob
 	@JOBID INT
@@ -154,8 +187,8 @@ AS
 	ON APPLICATIONS.STUDENTID = STUDENT.STUDENTID
 	INNER JOIN JOB 
 	ON APPLICATIONS.JOBID = JOB.JOB_ID
-	INNER JOIN CLASSES_TAKEN
-	ON APPLICATIONS.STUDENTID = CLASSES_TAKEN.STUDENTID
+	LEFT JOIN CLASSES_TAKEN
+	ON APPLICATIONS.STUDENTID = CLASSES_TAKEN.STUDENTID AND CLASSES_TAKEN.CLASSID = JOB.CLASSID
 	WHERE APPLICATIONS.JOBID = @JOBID;
 GO
 
@@ -189,7 +222,26 @@ END
 GO
 
 
+/*
 
+studentAdd
+Inserts a new student into the database
+Dependencies: 
+Parameters:
+SID (INT): ID of student being added
+FIRSTN (VARCHA): FIRST NAME OF STUDENT
+LASN (VARCHAR): LAST NAME OF STUDENT
+YEARGRAD (INT): EXPECTED GRADUATION DAT
+EMAIL (VARCHAR): EMAIL ADDRESS OF STUDENTS
+PHONE (VARCHAR): PHONE NUMBER OF STUDENT
+GTACERTLOC (VARCHAR): WHERE THE STUDENT RECEIVED THEIR GTA CERT
+GTATERM DATE: DATE THE STUDENT RECEIVED THEIR GTA CERT
+GPA (FLOAT): CUMULATIVE GPA
+HOURSCOMPLETED (INT): NUMBER OF HOURS TAKEN AT UMKC
+SEMESTERSCOMPLETED (INT): NUMBER OF SEMESTERS COMPLETED AT UMKC
+CURRENTMAJOR (VARCHAR): CURRENT MAJOR
+UNDERGRADDEGREETYPE (VARCHAR): WHAT STUDENT’S UNDERGRAD DEGREE TYPE
+*/
 
 CREATE PROCEDURE studentAdd
 	@SID int,
@@ -215,27 +267,22 @@ AS
 	@EMAIL, @PHONE, @GTACERTLOC, @GTATERM, @INTERNATL, @GRADELEVEL,
 	@GPA, @HOURSCOMPLETED, @SEMESTERSCOMPLETED, @CURRENTMAJOR, @UNDERGRADDEGREETYPE);
 GO
+
 alter table student
 alter column phone bigint;
+go
 
-
-EXEC studentAdd
-153,
-'BRYAN',
-'RICHLINSKI',
-2021,
-'BRYAN@GMAIL.COM',
-7854472531,
-'HERE',
-'2021-12-20',
-0,
-'U',
-4.0,
-5,
-2,
-'CS',
-'COMPUTER SCIENCE';
-
+/*
+jobAdd:
+adds a new job
+Dependencies: Class must exist before job
+Parameters:
+CLASSID (INT): ID OF CLASS JOB IS FOR
+JOBID (INT): ID OF JOB BEING ADDED
+JOBTITLE (VARCHAR): TITLE OF JOB
+JOBSTATUS (INT): NUMBER OF POSITIONS AVAILABLE
+JOBDESCRIPTION (VARCHAR): DESCRIPTION OF JOB
+*/
 
 CREATE PROCEDURE jobAdd
 	@CLASSID INT,
@@ -249,7 +296,16 @@ AS
 	VALUES (@CLASSID, @JOBID, @JOBTITLE, @JOBSTATUS, @JOBDESCRIPTION);
 GO
 
-
+/*
+classesAdd
+add a class
+Dependencies: 
+Parameters:
+CLASSID INT: OF CLASS
+DEPARTMENT (VARCHAR 1): C FOR COMPUTER SCIENCE
+CLASSDESCRIPTION (VARCHAR): DESCRIPTION OF CLASS
+CLASSNAME (VARCHAR): NAME OF CLASS
+*/
 CREATE PROCEDURE classesAdd
 	@CLASSID INT,
 	@DEPARTMENT VARCHAR(1),
@@ -261,7 +317,15 @@ AS
 	VALUES (@CLASSID, @DEPARTMENT,  @CLASSDESCRIPTION, @CLASSNAME);
 GO
 
-
+/*
+jobrequirementsAdd
+adds a class required for a job applicant
+Dependencies: Class must have already been added
+Parameters: 
+JOBID: ID OF JOB 
+CLASSID: ID OF REQUIRED CLASS
+GRAD: MINIMUM GRADE REQUIRED IN CLASS
+*/
 
 CREATE PROCEDURE jobrequirementsAdd
 	@JOBID INT,
@@ -273,15 +337,17 @@ AS
 GO
 
 
-CREATE PROCEDURE apply
-	@SID INT,
-	@JOBID INT
-AS
-	SET NOCOUNT ON;
-	INSERT INTO APPLICATIONS
-	VALUES(@SID, @JOBID, 'PENDING');
-GO
-
+/*classestakenAdd
+adds a class to class list taken by one student
+Dependencies: student must exist, class must exist
+Parameters:
+SID INT: STUDENT ID
+CLASSID INT: CLASS ID
+GRADE FLOAT: GRADE RECEIVED
+ATUMKC BIT: 1 IF THE CLASS WAS TAKEN AT UMKC
+LOCATIONTAKEN VARCHAR: WHERE THE CLASS WAS TAKEN
+TERM DATE: WHEN THE CLASS WAS TAKEN
+*/
 
 CREATE PROCEDURE classestakenAdd
 	@SID INT,
@@ -295,6 +361,7 @@ AS
 	INSERT INTO CLASSES_TAKEN
 	VALUES(	@SID, @CLASSID, @GRADE, @ATUMKC, @LOCATIONTAKEN, @TERM);
 GO
+
 
 
 CREATE PROCEDURE termAdd
@@ -313,7 +380,14 @@ ALTER TABLE APPLICATIONS
 ADD JOBSTATUS VARCHAR(20) NOT NULL;
 GO
 
-
+/*
+Apply:
+Inserts an application into a database for a student
+Dependencies: Trigger to prevent inserts if the student doesn’t match the requiremtnes
+Parameters:
+SID: ID (INT) of student applying
+JOB: ID (INT) of job being applied to
+*/
 
 CREATE PROCEDURE apply
 	@SID INT,
@@ -365,6 +439,14 @@ IF(@num = 0)
 GO
 */
 
+
+/*
+setAllStuendtsToZero:
+Set’s application status to reject for all applications to a specific job that haven’t been set to accepted
+Dependencies: 
+Parameters:
+JOBID: (INT) The ID of the job for which the applicants will be rejected
+*/
 CREATE PROCEDURE setAllStudentsToZero
 	@JOBID INT
 AS
@@ -374,6 +456,14 @@ AS
 	WHERE JOBSTATUS = 'PENDING' AND JOBID = @JOBID;
 GO
 
+/*
+rejectOneStudent:
+Sets a single application status to rejected based on the student and job
+Dependencies:
+Parameters:
+JOBID INT: ID of job the student has applied to
+STUDENT INT: the ID of the student being rejected
+*/
 CREATE PROCEDURE rejectOneStudent
 	@JOBID INT,
 	@STUDENT INT
@@ -383,6 +473,15 @@ AS
 	SET JOBSTATUS = 'REJECTED'
 	WHERE JOBID = @JOBID
 GO
+
+/*
+acceptStudent
+Sets application status to accepted for one student for one job
+Dependencies:
+Parameters:
+STUDENT INT: ID of student being accepted
+JOB INT: ID of the job student is accepted for
+*/
 
 CREATE PROCEDURE acceptStudent
 	@JOBID INT,
@@ -409,6 +508,15 @@ BEGIN
 END;
 GO
 
+
+/*
+
+getJobListings:
+returns all open job listings
+Dependencies: 
+Parameters:
+*/
+
 CREATE PROCEDURE getJobListings
 AS
 BEGIN
@@ -417,6 +525,15 @@ BEGIN
 	WHERE POSITIONS_AVAILABLE != 0;
 END
 GO
+
+
+/*
+getApplicants:
+returns all applicants to a specific job
+Dependencies: 
+Parameters:
+JOBTITLE VARCHAR: name of job being searched for
+*/
 
 CREATE PROCEDURE getApplicants
 	@JOBTITLE VARCHAR(30)
@@ -434,6 +551,13 @@ BEGIN
 END
 GO
 
+/*
+getjobsbyclass:
+returns all available jobs associated with a specific class
+Dependencies: 
+Parameters:
+CLASSTITLE VARCHAR: name of class being searched for
+*/
 
 CREATE PROCEDURE getjobsbyclass
 	@CLASSTITLE VARCHAR(30)
@@ -446,6 +570,14 @@ BEGIN
 	WHERE JOB.POSITIONS_AVAILABLE > 0 AND CLASS_NAME = @CLASSTITLE;
 END
 GO
+
+/*
+getRequirementsForJob:
+returns a list of all classes and grade in class required to apply for job
+Dependencies
+Parameters:
+JOBTITLE VARCHAR: name of job being searched
+*/
 
 CREATE PROCEDURE getRequirementsForJob
 	@JOBTITLE VARCHAR(30)
@@ -462,6 +594,14 @@ END
 GO
 
 
+/*
+getRequirementsNotMet:
+returns a list of classes and grade required in class not met to apply for a job posting
+Dependencies: Trigger to prevent inserts if the student doesn’t match the requiremtnes
+Parameters:
+JOBID INT: the ID of the job being searched
+STUDENTID INT: the ID of the student being searched
+*/
 
 CREATE PROCEDURE getRequirementsNotMet
 	@JOBID INT,
@@ -480,17 +620,6 @@ GO
 
 
 
-/*
-CREATE PROCEDURE getStudentsQalifications
-@SID
-AS
-	SELECT CLASSES.CLASS_NAME, CLASSES_TAKEN.GRADE
-	FROM CLASSES
-	INNER JOIN CLASSES_TAKEN
-	ON CLASSES.CLASSID = CLASSES_TAKEN.CLASSID;
-GO
-*/
-
 CREATE TRIGGER noApplyUnlessAvailable
 ON APPLICATIONS AFTER INSERT 
 AS
@@ -505,4 +634,117 @@ END
 GO
 
 
+
+/*
+filterJobRequirements:
+returns classes and grade in classes needed to apply to a job
+Dependencies: 
+Parameters:
+JOBID INT: ID of the job being applied for
+*/
+
+CREATE PROCEDURE filterApplicants
+	@JOBID INT,
+	@GPA FLOAT,
+	@GRADE_LEVEL VARCHAR,
+	@ORDER_SEMESTERS BIT,
+	@ORDER_GPA BIT,
+	@ORDER_TOOK_CLASS BIT
+AS
+	SELECT * FROM 
+	(SELECT STUDENT.FIRST_NAME, STUDENT.LAST_NAME, STUDENT.GPA,
+		STUDENT.SEMESTERS_COMPLETED, STUDENT.GRADE_LEVEL,
+
+		CASE
+			WHEN
+				CLASSES_TAKEN.CLASSID IS NULL
+			THEN 'NO'
+			ELSE 'YES'
+		END
+		AS TAKEN1
+	FROM JOB
+	JOIN APPLICATIONS
+	ON JOB.JOB_ID = APPLICATIONS.JOBID
+	JOIN STUDENT
+	ON STUDENT.STUDENTID = APPLICATIONS.STUDENTID
+	LEFT JOIN CLASSES_TAKEN
+	ON APPLICATIONS.STUDENTID = CLASSES_TAKEN.STUDENTID AND JOB.CLASSID = CLASSES_TAKEN.CLASSID
+	WHERE JOB.JOB_ID = @JOBID) AS K
+	ORDER BY
+		CASE 
+		WHEN @ORDER_GPA = 1 THEN GPA
+		WHEN @ORDER_SEMESTERS = 1 THEN SEMESTERS_COMPLETED
+		WHEN @ORDER_TOOK_CLASS = 1 THEN TAKEN1
+		END DESC;
+GO
+
+-- JANKY AF BUT IT SHOULD DO THE TRICK\
+
+-- This trigger should prevent anyone from applying for a job unless they have a gta cert
+
+CREATE TRIGGER gtaCertRequired
+	ON APPLICATIONS AFTER INSERT
+	AS
+		IF((SELECT TOP 1 STUDENT.GTA_CERT_LOCATION FROM STUDENT
+		INNER join inserted
+		ON inserted.STUDENTID = STUDENT.STUDENTID) IS NULL)
+		BEGIN
+			RAISERROR('Requirements not met',1,1);
+			ROLLBACK
+		END
+GO
+
+
+
+/*
+filterApplicants
+filters applicants to a job by gpa, , grade level, and orders by either gpa, semesters taken, or if the applicant took the class associated with the job
+returns the first name, last name, gpa, semesters complete, grade level, and if the student took the class associated with the job
+Dependencies:
+Parameters: 
+JOBID INT: THE ID OF THE JOB BEING SEARCHED
+GPA FLOAT: THE MINIMUM GPA BEING FILTERED FOR
+GRADE_LEVEL VARCHAR: IF THE STUDENT IS AN U UNDERGRAD OR G GRADUATE OR P PHD
+ORDER_SEMESTERS BIT: 1 IF ORDERING BY NUMBER OF SEMESTERS TAKEN
+ORDER_GPA BIT: 1 IF ORDERING BY GPA
+ORDER_TOOK_CLASS BIT: 1 IF ORDERING BY IF THE STUDENT TOOK THE CLASS ASSOCIATED WITH THE JOB
+*/
+
+
+
+
+CREATE PROCEDURE studentAlter
+	@SID int,
+	@FIRSTN VARCHAR(20),
+	@LASTN VARCHAR(20),
+	@YEARGRAD INT,
+	@EMAIL VARCHAR(50),
+	@PHONE BIGINT,
+	@GTACERTLOC VARCHAR(50) = NULL,
+	@GTATERM DATE = NULL,
+	@INTERNATL BIT = 0,
+	@GRADELEVEL VARCHAR(10),
+	@GPA FLOAT,
+	@HOURSCOMPLETED INT,
+	@SEMESTERSCOMPLETED INT,
+	@CURRENTMAJOR VARCHAR(50),
+	@UNDERGRADDEGREETYPE VARCHAR(50)
+
+AS
+	SET NOCOUNT ON;
+	UPDATE STUDENT
+	SET STUDENTID = @SID,FIRST_NAME =  @FIRSTN, LAST_NAME = @LASTN, YEAR_GRAD =  @YEARGRAD, 
+	EMAIL = @EMAIL, PHONE = @PHONE, GTA_CERT_LOCATION =  @GTACERTLOC, GTA_TERM =  @GTATERM, INTERNATL =  @INTERNATL, GRADE_LEVEL =  @GRADELEVEL,
+	GPA = @GPA, HOURS_COMPLETED  = @HOURSCOMPLETED, SEMESTERS_COMPLETED = @SEMESTERSCOMPLETED, CURRENT_MAJOR_FEILD = @CURRENTMAJOR, UNDERGRAD_DEGREE_TYPE = @UNDERGRADDEGREETYPE
+	WHERE STUDENTID = @SID;
+GO
+
+CREATE PROCEDURE studentExists
+	@SID INT
+AS
+	SET NOCOUNT ON;
+	SELECT COUNT(STUDENTID) AS SCOUNT
+	FROM STUDENT
+	WHERE STUDENT.STUDENTID = @SID;
+GO
 
