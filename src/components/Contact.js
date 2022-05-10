@@ -20,7 +20,7 @@ class Contact extends React.Component {
                                     <h1>We see you are facing some troubles...</h1>
                                     <br/>
                                     <div>This site was created by the Team at Error 404:</div>
-                                    <div>Swetha Bhumireddy<br/>Christian Chapman<br/>Bryan Richlinski<br/>Ethan Stiles<br/>Hayley Griffin</div>
+                                    <div>Swetha Bhumireddy<br/>Christian Chapman<br/>Bryan Richlinski<br/>Ethan Stiles<br/></div>
                                     <br/>
                                     <h4>We have since graduated, please contact UMKC IT Support for your issues.</h4>
                                 </text>
