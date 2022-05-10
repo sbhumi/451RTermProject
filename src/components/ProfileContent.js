@@ -13,7 +13,7 @@ var count = 0;
 function ProfileContent() {
     console.log("hello it's me");
     const { instance, accounts } = useMsal();
-    //const [graphData, setGraphData] = useState(null);
+    const [graphData, setGraphData] = useState(null);
     const dispatch = useDispatch();
 
     const name = accounts[0] && accounts[0].name;
