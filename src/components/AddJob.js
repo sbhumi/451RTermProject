@@ -9,14 +9,70 @@ import '../styleSheets/NavMenu.css';
 import { useNavigate } from "react-router-dom";
 import ReturnProfileData from './ReturnProfile';
 import { useIsAuthenticated,  AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import { useSelector, useDispatch } from 'react-redux';
 
+
+function JobPostingsPage(JobPostings) {
+    return function PageHOC() {
+		const microsoftData = useSelector((state) => state.microsoftData.value);
+		console.log(microsoftData);
+        return <JobPostings microsoftData={microsoftData} />;
+    }
+}
 
 class AddJob extends React.Component {
 	showSettings (event) {
 		event.preventDefault();
 	}
 
+	constructor(props) {
+        super(props);
+		this.state = {
+			typeInput: "",
+			titleInput: "",
+			jobIDInput: "",
+			descrInput: "",
+			reqCourseInput: ""
+		}
+    }
+
+	updateTypeInput(evt) {
+		const val = evt.target.id;
+		this.setState({
+			typeInput: val
+		});
+	}
+
+	updateTitleInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			titleInput: val
+		});
+	}
+
+	updateJobIDInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			jobIDInput: val
+		});
+	}
+
+	updateDescriptionInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			descrInput: val
+		});
+	}
+
+	updateRequiredCourseInput(evt) {
+		const val = evt.target.id;
+		this.setState({
+			reqCourseInput: val
+		});
+	}
+
 	render() {
+
 		return (
 			<div className = "addjobform" >
 				<AdminNavMenu/>
@@ -30,7 +86,7 @@ class AddJob extends React.Component {
 
 					<center><Form>
 						<Row><fieldset>
-							<Form.Group as={Row} className="jobType">
+							<Form.Group as={Row} className="jobType" value={this.state.typeInput} onChange={evt => this.updateTypeInput(evt)}>
 							<Col></Col><Col></Col>
 							<Form.Label as="types" column sm={2}>Job Type:</Form.Label>
 							<Col sm={3} align = "left">
@@ -63,7 +119,7 @@ class AddJob extends React.Component {
 						<Col></Col><Col></Col>
 						<Form.Label column sm = {2}>Job Title:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "text" placeholder = "CS 000 Grader"/>
+								<Form.Control size = "sm" type = "text" placeholder = "CS 000 Grader" value={this.state.titleInput} onChange={evt => this.updateTitleInput(evt)}/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Enter job title.</Form.Text>
@@ -75,7 +131,7 @@ class AddJob extends React.Component {
 						<Col></Col><Col></Col>
 						<Form.Label column sm = {2}>Job ID:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "integer" placeholder = "0123"/>
+								<Form.Control size = "sm" type = "integer" placeholder = "0123" value={this.state.jobIDInput} onChange={evt => this.updateJobIDInput(evt)}/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Enter the job ID.</Form.Text>
@@ -86,7 +142,7 @@ class AddJob extends React.Component {
 						<Col></Col><Col></Col>
 						<Form.Label column sm = {2}>Job Description:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "integer" placeholder = "You are expected to grade classwork."/>
+								<Form.Control size = "sm" type = "integer" placeholder = "You are expected to grade classwork." value={this.state.descrInput} onChange={evt => this.updateDescriptionInput(evt)}/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Enter a brief description of the position.</Form.Text>
@@ -95,7 +151,7 @@ class AddJob extends React.Component {
 
                         <Row>
 							<fieldset>
-							<Form.Group as={Row} className="reqCourse">
+							<Form.Group as={Row} className="reqCourse" value={this.state.reqCourseInput} onChange={evt => this.updateRequiredCourseInput(evt)}>
 							<Col sm = {2}></Col>
 							<Form.Label as="umCourses" column sm={2}>Required Courses:</Form.Label>
 								<Col sm={6} align = "left">
@@ -210,7 +266,7 @@ class AddJob extends React.Component {
 
 					<br></br><br></br><br></br>
 					<div className="buttonSubmitInfo">
-						<button className="btnSubmitInfo">Submit Information</button>
+						<button className="btnSubmitInfo" onClick={() => {}}>Submit Information</button>
 					</div>
 					<br></br><br></br><br></br>
 

@@ -9,14 +9,112 @@ import '../styleSheets/AppForm.css';
 import '../styleSheets/NavMenu.css';
 import { useNavigate } from "react-router-dom";
 import { useIsAuthenticated,  AuthenticatedTemplate, UnauthenticatedTemplate } from "@azure/msal-react";
+import { useSelector, useDispatch } from 'react-redux';
+
+
+function AppFormPage(AppForm) {
+    return function PageHOC() {
+		const microsoftData = useSelector((state) => state.microsoftData.value);
+		console.log(microsoftData);
+        return <AppForm microsoftData={microsoftData} />;
+    }
+}
 
 class AppForm extends React.Component {
+	constructor(props) {
+        super(props);
+		this.state = {
+			levelInput: "",
+			graduatingInput: "",
+			cGPAInput: "",
+			hrsInput: "",
+			ugDegInput: "",
+			currMajor: "",
+			gtaCertInput: "",
+			yesCertInput: "",
+			waiveCertInput: "",
+			coursesInput: ""
+		}
+    }
+
+	updateLevelInput(evt) {
+		const val = evt.target.id;
+		this.setState({
+			levelInput: val
+		});
+	}
+
+	updateGraduatingInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			graduatingInput: val
+		});
+	}
+
+	updateCGPAInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			cGPAInput: val
+		});
+	}
+
+	updateHoursInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			hrsInput: val
+		});
+	}
+
+	updateUgDegreeInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			ugDegInput: val
+		});
+	}
+
+	updateCurrMajorInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			currMajorInput: val
+		});
+	}
+
+	updateGTACertInput(evt) {
+		const val = evt.target.id;
+		this.setState({
+			gtaCertInput: val
+		});
+	}
+
+	updateYesCertInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			yesCertInput: val
+		});
+	}
+
+	updateWaiveCertInput(evt) {
+		const val = evt.target.value;
+		this.setState({
+			waiveCertInput: val
+		});
+	}
+
+	updateCoursesInput(evt) {
+		const val = evt.target.id;
+		this.setState({
+			coursesInput: val
+		});
+	}
+
 	showSettings (event) {
 		event.preventDefault();
 	}
 
 	render() { 
+
 		return (
+
 			<div className = "appform" >
 				<AppNavMenu/>
 
@@ -29,7 +127,7 @@ class AppForm extends React.Component {
 
 					<center><Form>
 						<Row><fieldset>
-							<Form.Group as={Row} className="lvlRadio">
+							<Form.Group as={Row} className="lvlRadio" value={this.state.levelInput} onChange={evt => this.updateLevelInput(evt)}>
 							<Col></Col>
 							<Form.Label as="lvls" column sm={2}>Current Level:</Form.Label>
 							<Col sm={3} align = "left">
@@ -62,7 +160,7 @@ class AppForm extends React.Component {
 						<Col></Col>
 						<Form.Label column sm={2}>Graduating Semester:</Form.Label>
 							<Col sm={3}>
-								<Form.Control size = "sm" type="date"/>
+								<Form.Control size = "sm" type="date" value={this.state.graduatingInput} onChange={evt => this.updateGraduatingInput(evt)}/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Choose first day of month if unsure.</Form.Text>
@@ -73,7 +171,7 @@ class AppForm extends React.Component {
 						<Col></Col>
 						<Form.Label column sm = {2}>Cumulative GPA:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "integer" placeholder = "0.00"/>
+								<Form.Control size = "sm" type = "integer" placeholder = "0.00" value={this.state.cGPAInput} onChange={evt => this.updateCGPAInput(evt)}/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Leave blank if first semester in progress.</Form.Text>
@@ -84,7 +182,7 @@ class AppForm extends React.Component {
 						<Col></Col>
 						<Form.Label column sm = {2}>Hours at UMKC:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "integer" placeholder = "000"/>
+								<Form.Control size = "sm" type = "integer" placeholder = "000" value={this.state.hrsInput} onChange={evt => this.updateHoursInput(evt)}/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Leave blank if first semester in progress.</Form.Text>
@@ -95,7 +193,7 @@ class AppForm extends React.Component {
 						<Col></Col>
 						<Form.Label column sm = {2}>Undergraduate Degree:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "text" placeholder = "BSCS"/>
+								<Form.Control size = "sm" type = "text" placeholder = "BSCS" value={this.state.ugDegInput} onChange={evt => this.updateUgDegreeInput(evt)}/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Enter if applicable.</Form.Text>
@@ -106,7 +204,7 @@ class AppForm extends React.Component {
 						<Col></Col>
 						<Form.Label column sm = {2}>Current Major:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "text" placeholder = "Computer Science"/>
+								<Form.Control size = "sm" type = "text" placeholder = "Computer Science" value={this.state.currMajorInput} onChange={evt => this.updateCurrMajorInput(evt)}/>
 							</Col><Col sm = {3}></Col><Col></Col>
 						</Form.Group></Row>
 
@@ -119,7 +217,7 @@ class AppForm extends React.Component {
 					<Form>
 						<Row>
 							<fieldset>
-							<Form.Group as={Row} className="gtaCert">
+							<Form.Group as={Row} className="gtaCert" value={this.state.gtaCertInput} onChange={evt => this.updateGTACertInput(evt)}>
 							<Col></Col>
 							<Form.Label as="app" column sm={2}>GTA Certified:</Form.Label>
 								<Col sm={3} align = "left">
@@ -160,7 +258,7 @@ class AppForm extends React.Component {
 						<Col></Col><Col></Col>
 						<Form.Label column sm = {2}>If Yes:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "text" placeholder = "Fall 2020"/>
+								<Form.Control size = "sm" type = "text" placeholder = "Fall 2020" value={this.state.yesCertInput} onChange={evt => this.updateYesCertInput(evt)}/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Enter term you recevied GTA certification.</Form.Text>
@@ -171,7 +269,7 @@ class AppForm extends React.Component {
 						<Col></Col><Col></Col>
 						<Form.Label column sm = {2}>If Waived:</Form.Label>
 							<Col sm = {3}>
-								<Form.Control size = "sm" type = "text" placeholder = "UMKC"/>
+								<Form.Control size = "sm" type = "text" placeholder = "UMKC" value={this.state.waiveCertInput} onChange={evt => this.updateWaiveCertInput(evt)}/>
 							</Col>
 							<Col sm = {3} align = "left">
 								<Form.Text muted>Enter name of US university you received degree.</Form.Text>
@@ -180,7 +278,7 @@ class AppForm extends React.Component {
 
 						<Row>
 							<fieldset>
-							<Form.Group as={Row} className="umkcCourse">
+							<Form.Group as={Row} className="umkcCourse" value={this.state.coursesInput} onChange={evt => this.updateCoursesInput(evt)}>
 							<Col sm = {2}></Col>
 							<Form.Label as="umCourses" column sm={2}>UMKC Courses Taken:</Form.Label>
 								<Col sm={6} align = "left">
@@ -292,7 +390,7 @@ class AppForm extends React.Component {
 
 					<br></br><br></br><br></br>
 					<div className="buttonSubmitInfo">
-						<button className="btnSubmitInfo">Submit Information</button>
+						<button className="btnSubmitInfo" onClick={() => {}}>Submit Information</button>
 					</div>
 					<br></br><br></br><br></br>
 
