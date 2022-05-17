@@ -8,8 +8,6 @@ export const microsoftSlice = createSlice({
     },
     reducers: {
       assignData: (state, action) => {
-        console.log("inside reducer");
-        console.log(action.payload);
         state.value = [action.payload];
       },
     },
